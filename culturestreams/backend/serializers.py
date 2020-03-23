@@ -9,7 +9,8 @@ class TagSerializer(serializers.ModelSerializer):
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
-        fields = ('id', 'name', 'parentCategory')
+        fields = ('id', 'name')
+        #'parentCategory'
 
 # Serializers define the API representation.
 class EventSerializer(serializers.ModelSerializer):
