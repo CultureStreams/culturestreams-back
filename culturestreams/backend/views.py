@@ -11,7 +11,7 @@ class EventView(viewsets.ModelViewSet):
 class PlattformView(viewsets.ModelViewSet):
     queryset = Plattform.objects.all()
     serializer_class = PlattformSerializer
-    filter_fields = ('category')
+    filter_fields = ('category',)
 
 class CategoryView(viewsets.ModelViewSet):
     queryset = Category.objects.all()

@@ -9,7 +9,7 @@ class TagSerializer(serializers.ModelSerializer):
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
-        fields = ('id', 'name')
+        fields = ('id', 'name', 'parentCategory')
 
 # Serializers define the API representation.
 class EventSerializer(serializers.ModelSerializer):
@@ -18,14 +18,12 @@ class EventSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Event
-        fields = ('id', 'title', 'organizer', 'startDate', 'endDate', 'startTime', 'endTime', 'availableLiveOnly', 'link', 'description', 'category', 'tags', 'datePublished')
+        fields = ('__all__')
         #fields = '__all__'
     def to_representation(self, instance):
         rep_cat = super(EventSerializer, self).to_representation(instance)
         rep_cat['category'] = instance.category.name
         return rep_cat
-
-
 
 class PlattformSerializer(serializers.ModelSerializer):
     #tags = TagSerializer(many=True, read_only=True)
