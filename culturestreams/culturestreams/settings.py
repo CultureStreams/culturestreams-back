@@ -19,7 +19,7 @@ env = environ.Env()
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECRET_KEY TODO
-SECRET_KEY = '***REMOVED***'
+SECRET_KEY = 'd_&*7ya_3c=auc96d*+(a@ov$3bmoka7scnrgd0r3twc#1k^_k'
 
 
 # SECURITY WARNING: don't run with debug turned on in production!

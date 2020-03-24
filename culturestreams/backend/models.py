@@ -28,7 +28,7 @@ class SubCategory(models.Model):
         unique_together = ('slug', 'parent',)
         verbose_name_plural = 'subcategories'
     def __str__(self):
-        return self.name
+        return self.parent.name + ' --> ' + self.name
 
 class Organizer(models.Model):
     name = models.CharField('Name', max_length=200)
@@ -82,4 +82,4 @@ class Plattform(models.Model):
     subCategory = models.ForeignKey(SubCategory, on_delete=models.CASCADE, null=True, blank=True)
     tags = models.ManyToManyField(Tag, blank=True)
     def __str__(self):
-        return self.name + ' by ' + self.organizer
+        return self.name + ' by ' + self.organizer.name
