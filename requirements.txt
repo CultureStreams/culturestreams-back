@@ -3,3 +3,5 @@ djangorestframework
 django-filter
 django-environ
 django-cors-headers
+django-autoslug
+bcrypt

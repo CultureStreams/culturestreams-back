@@ -9,6 +9,8 @@ router.register('events', views.EventView)
 router.register('plattforms', views.PlattformView)
 router.register('categories', views.CategoryView)
 router.register('tags', views.TagView)
+router.register('organizers', views.OrganizerView)
+router.register('subcategories', views.SubCategoryView)
 urlpatterns = [
     path('', include(router.urls))
 ]
