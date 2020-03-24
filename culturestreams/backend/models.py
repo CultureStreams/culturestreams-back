@@ -1,5 +1,6 @@
 from django.db import models
 from autoslug import AutoSlugField
+from .helpers import CustomDateTimeField
 import datetime
 
 class Tag(models.Model):
