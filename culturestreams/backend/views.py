@@ -6,17 +6,19 @@ from .serializers import EventSerializer, PlattformSerializer, CategorySerialize
 class EventView(viewsets.ModelViewSet):
     queryset = Event.objects.all()
     serializer_class = EventSerializer
-    filter_fields = ('startDate','category','organizer')
+    filter_fields = ('id','startDate','category','organizer')
 
 class PlattformView(viewsets.ModelViewSet):
     queryset = Plattform.objects.all()
     serializer_class = PlattformSerializer
-    filter_fields = ('category',)
+    filter_fields = ('id','category')
 
 class CategoryView(viewsets.ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
+    filter_fields = ('id',)
 
 class TagView(viewsets.ModelViewSet):
     queryset = Tag.objects.all()
     serializer_class = TagSerializer
+    filter_fields = ('id',)
