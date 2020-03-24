@@ -37,6 +37,7 @@ class Organizer(models.Model):
     description = models.CharField('Beschreibung', null=True, blank=True, max_length=400)
     image = models.URLField('Bild', null=True, blank=True, max_length=250)
     #eventContact TODO
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank=True)
     subCategory = models.ForeignKey(SubCategory, on_delete=models.CASCADE, null=True, blank=True)
     tags = models.ManyToManyField(Tag, blank=True)
     datePublished = CustomDateTimeField(auto_now_add=True)
@@ -59,6 +60,7 @@ class Event(models.Model):
     image = models.URLField('Bild', blank=True, max_length=250)
     #eventContact TODO
     #eventLocation TODO
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank=True)
     subCategory = models.ForeignKey(SubCategory, on_delete=models.CASCADE)
     tags = models.ManyToManyField(Tag, blank=True)
     datePublished = models.DateTimeField(auto_now_add=True)
@@ -76,6 +78,7 @@ class Plattform(models.Model):
     image = models.URLField('Bild', blank=True, max_length=250)
     #eventContact TODO
     #eventLocation TODO
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank=True)
     subCategory = models.ForeignKey(SubCategory, on_delete=models.CASCADE, null=True, blank=True)
     tags = models.ManyToManyField(Tag, blank=True)
     def __str__(self):
