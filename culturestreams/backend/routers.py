@@ -1,11 +1,11 @@
 from rest_framework import routers
-#from .views import EventViewSet
+from . import views
 
-# Routers provide an easy way of automatically determining the URL conf.
 router = routers.DefaultRouter()
-router.register('events', views.EventViewSet)
-router.register('plattforms', views.PlattformViewSet)
-router.register('categories', views.CategoryViewSet)
-router.register('tags', views.TagViewSet)
-router.register('organizers', views.OrganizerViewSet)
-router.register('subcategories', views.SubCategoryViewSet)
+router.register('events', views.EventView)
+router.register('plattforms', views.PlattformView)
+router.register('categories', views.CategoryView)
+router.register('tags', views.TagView)
+router.register('organizers', views.OrganizerView)
+router.register('subcategories', views.SubCategoryView)
+# TODO router.register('forms', views.FormView)
