@@ -3,11 +3,8 @@ from autoslug import AutoSlugField
 from .helpers import CustomDateTimeField
 import datetime
 
-class Tag(models.Model):
-    name = models.CharField('Name', max_length=200)
-    slug = AutoSlugField(populate_from='name', unique_with=('name'), null=True, blank=True)
-    def __str__(self):
-        return self.name
+# class Tag(models.Model):
+#     name = models.CharField('Name', max_length=200)
 
 class Category(models.Model):
     name = models.CharField('Name', max_length=200)
@@ -20,17 +17,6 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
-class SubCategory(models.Model):
-    name = models.CharField('Name', max_length=200)
-    slug = AutoSlugField(populate_from='name', null=True, blank=True)
-    parent = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)
-    #description TODO ?
-    class Meta:
-        unique_together = ('slug', 'parent',)
-        verbose_name_plural = 'subcategories'
-    def __str__(self):
-        return self.parent.name + ' --> ' + self.name
-
 class Organizer(models.Model):
     name = models.CharField('Name', max_length=200)
     slug = AutoSlugField(populate_from='name', unique_with=('name'), null=True, blank=True)
@@ -39,8 +25,7 @@ class Organizer(models.Model):
     image = models.URLField('Bild', null=True, blank=True, max_length=250)
     #eventContact TODO
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)
-    subCategory = models.ForeignKey(SubCategory, on_delete=models.SET_NULL, null=True, blank=True)
-    tags = models.ManyToManyField(Tag, blank=True)
+    # tags = models.ManyToManyField(Tag, blank=True)
     datePublished = CustomDateTimeField(auto_now_add=True)
     #lastUpdated TODO = CustomDateTimeField(auto_now_add=True)
     def __str__(self):
@@ -63,8 +48,7 @@ class Event(models.Model):
     #eventContact TODO
     #eventLocation TODO
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)
-    subCategory = models.ForeignKey(SubCategory, on_delete=models.SET_NULL, null=True, blank=True)
-    tags = models.ManyToManyField(Tag, blank=True)
+    # tags = models.ManyToManyField(Tag, blank=True)
     datePublished = models.DateTimeField(auto_now_add=True)
     #lastUpdated TODO = CustomDateTimeField(auto_now_add=True)
     def __str__(self):
@@ -82,7 +66,6 @@ class Plattform(models.Model):
     #eventContact TODO
     #eventLocation TODO
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)
-    subCategory = models.ForeignKey(SubCategory, on_delete=models.SET_NULL, null=True, blank=True)
-    tags = models.ManyToManyField(Tag, blank=True)
+    # tags = models.ManyToManyField(Tag, blank=True)
     def __str__(self):
         return self.name + ' by ' + self.organizer.name

@@ -1,19 +1,14 @@
 from rest_framework import serializers
-from .models import Tag, Category, SubCategory, Event, Plattform, Organizer
+from .models import Category, Event, Plattform, Organizer
 
-class TagSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Tag
-        fields = ('__all__')
+# class TagSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Tag
+#         fields = ('__all__')
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
-        fields = ('__all__')
-
-class SubCategorySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = SubCategory
         fields = ('__all__')
 
 class OrganizerSerializer(serializers.ModelSerializer):
