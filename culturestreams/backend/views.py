@@ -20,7 +20,7 @@ class EventFilter(filters.FilterSet):
     tags = TagsFilter(field_name='tags')
     class Meta:
         Model = Event
-        fields = ('dateFrom','dateTo','tags',)
+        fields = ('dateFrom','dateTo','tags')
 
 class PlattformFilter(filters.FilterSet):
     tags = TagsFilter(field_name='tags')

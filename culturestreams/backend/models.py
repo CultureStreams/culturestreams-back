@@ -19,7 +19,7 @@ class Organizer(models.Model):
     name = models.CharField('Name', max_length=200)
     slug = AutoSlugField(populate_from='name', unique_with=('name'), null=True, blank=True)
     website = models.URLField('Webseite', null=True, blank=True, max_length=250)
-    description = models.CharField('Beschreibung', null=True, blank=True, max_length=400)
+    description = models.TextField('Beschreibung', null=True, blank=True, max_length=700)
     image = models.URLField('Bild', null=True, blank=True, max_length=250)
     #eventContact TODO
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)
@@ -39,10 +39,8 @@ class Event(models.Model):
     recurring = models.BooleanField(default=False)
     #eventCost abhängig von freeOfCharge=False TODO
     availableLiveOnly = models.BooleanField(default=True)
-    #reccuring TODO
-    #reccuring details TODO
     link = models.URLField('Link', max_length=250)
-    description = models.CharField('Beschreibung', max_length=400)
+    description = models.TextField('Beschreibung', max_length=1000)
     image = models.URLField('Bild', blank=True, max_length=250)
     #eventContact TODO
     #eventLocation TODO
@@ -60,7 +58,7 @@ class Plattform(models.Model):
     freeOfCharge = models.BooleanField(default=True)
     availableLiveOnly = models.BooleanField(default=True)
     link = models.URLField('Link', max_length=250)
-    description = models.CharField('Beschreibung', max_length=400)
+    description = models.TextField('Beschreibung', max_length=1000)
     image = models.URLField('Bild', blank=True, max_length=250)
     #eventContact TODO
     #eventLocation TODO

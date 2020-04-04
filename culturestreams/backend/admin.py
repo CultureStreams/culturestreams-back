@@ -11,7 +11,7 @@ class EventAdmin(admin.ModelAdmin):
         return u", ".join(o.name for o in obj.tags.all())
 
 class PlattformAdmin(admin.ModelAdmin):
-    list_display = ('id','name','slug','tagList','organizer','freeOfCharge','availableLiveOnly','link','description','image',)
+    list_display = ('id','name','slug','tagList','category','organizer','freeOfCharge','availableLiveOnly','link','description','image',)
     ordering = ('id','name','link',)
     search_fields = ('name','organizer',)
     def get_queryset(self, request):
