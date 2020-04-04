@@ -10,14 +10,18 @@ class EventAdmin(admin.ModelAdmin):
         return "\n".join([p.name for p in obj.tags.all()])
 
 class PlattformAdmin(admin.ModelAdmin):
-    list_display = ('id','name','slug','organizer','freeOfCharge','availableLiveOnly','link','description','image',)
+    list_display = ('id','name','slug','get_tags','organizer','freeOfCharge','availableLiveOnly','link','description','image',)
     ordering = ('id','name','link',)
-    search_fields = ('name','organizer',)
+    search_fields = ('name','organizer','get_tags',)
+    def get_tags(self, obj):
+        return "\n".join([p.name for p in obj.tags.all()])
 
 class OrganizerAdmin(admin.ModelAdmin):
-    list_display = ('id','name','slug','website','description','image','category','datePublished',)
+    list_display = ('id','name','slug','get_tags','website','description','image','category','datePublished',)
     ordering = ('id','name','slug','website','description','image','category','datePublished',)
-    search_fields = ('name','organizer',)
+    search_fields = ('name','organizer','get_tags',)
+    def get_tags(self, obj):
+        return "\n".join([p.name for p in obj.tags.all()])
 
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('id','name','slug',)
