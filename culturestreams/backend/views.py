@@ -1,8 +1,19 @@
 from django.shortcuts import render
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from django_filters import rest_framework as filters
+from django.db import models
 from .models import Tag, Category, SubCategory, Event, Plattform, Organizer
 from .serializers import EventSerializer, PlattformSerializer, CategorySerializer, TagSerializer, SubCategorySerializer, OrganizerSerializer
+
+
+class EventFilter(filters.FilterSet):
+    dateFrom = filters.DateTimeFilter(field_name='start', lookup_expr='gte')
+    dateTo = filters.DateTimeFilter(field_name='start', lookup_expr='lt')
+    class Meta:
+        Model = Event
+        fields = ('startDate',)
+
 
 class TagView(viewsets.ModelViewSet):
     queryset = Tag.objects.all()
@@ -25,7 +36,8 @@ class SubCategoryView(viewsets.ModelViewSet):
 class EventView(viewsets.ModelViewSet):
     queryset = Event.objects.all()
     serializer_class = EventSerializer
-    filter_fields = ('id','name','start','category','organizer','freeOfCharge','availableLiveOnly','tags')
+    filter_fields = ('id','name','category','organizer','freeOfCharge','availableLiveOnly','tags', 'datePublished')
+    filterset_class = EventFilter
     #permission_classes = (IsAuthenticatedOrReadOnly,)
 
 class PlattformView(viewsets.ModelViewSet):

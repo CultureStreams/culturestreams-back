@@ -2,6 +2,7 @@
 venv
 *.DS_Store
 .DS_Store
-_tbd_*.py
+_tbd_*
 db.sqlite3
 python37
+docker-compose.yml
