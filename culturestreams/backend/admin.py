@@ -3,9 +3,11 @@ from .models import Category, Tag, Event, Plattform, Organizer, SubCategory
 
 
 class EventAdmin(admin.ModelAdmin):
-    list_display = ('id','name','slug','start','category','organizer','freeOfCharge','availableLiveOnly','link',)
+    list_display = ('id','name','slug','start','category','get_tags','organizer','freeOfCharge','availableLiveOnly','link',)
     ordering = ('id','name','start','category','organizer','freeOfCharge','availableLiveOnly',)
-    search_fields = ('name','organizer',)
+    search_fields = ('name','organizer','get_tags')
+    def get_tags(self, obj):
+        return "\n".join([p.name for p in obj.tags.all()])
 
 class PlattformAdmin(admin.ModelAdmin):
     list_display = ('id','name','slug','organizer','freeOfCharge','availableLiveOnly','link','description','image',)

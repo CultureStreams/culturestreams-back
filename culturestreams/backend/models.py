@@ -5,13 +5,13 @@ import datetime
 
 class Tag(models.Model):
     name = models.CharField('Name', max_length=200)
-    slug = AutoSlugField(populate_from='name', null=True, blank=True)
+    slug = AutoSlugField(populate_from='name', unique_with=('name'), null=True, blank=True)
     def __str__(self):
         return self.name
 
 class Category(models.Model):
     name = models.CharField('Name', max_length=200)
-    slug = AutoSlugField(populate_from='name', null=True, blank=True)
+    slug = AutoSlugField(populate_from='name', unique_with=('name'), null=True, blank=True)
     icon = models.URLField('Icon-Link', null=True, blank=True, max_length=250)
     #description TODO ?
     class Meta:
@@ -33,7 +33,7 @@ class SubCategory(models.Model):
 
 class Organizer(models.Model):
     name = models.CharField('Name', max_length=200)
-    slug = AutoSlugField(populate_from='name', null=True, blank=True)
+    slug = AutoSlugField(populate_from='name', unique_with=('name'), null=True, blank=True)
     website = models.URLField('Webseite', null=True, blank=True, max_length=250)
     description = models.CharField('Beschreibung', null=True, blank=True, max_length=400)
     image = models.URLField('Bild', null=True, blank=True, max_length=250)
@@ -48,7 +48,7 @@ class Organizer(models.Model):
 
 class Event(models.Model):
     name = models.CharField('Titel', max_length=200)
-    slug = AutoSlugField(populate_from='name', null=True, blank=True)
+    slug = AutoSlugField(populate_from=('name'), unique_with=('name', 'start'), null=True, blank=True)
     organizer = models.ForeignKey(Organizer, on_delete=models.SET_NULL, null=True, blank=True)
     start = models.DateTimeField()
     end = models.DateTimeField()
@@ -72,7 +72,7 @@ class Event(models.Model):
 
 class Plattform(models.Model):
     name = models.CharField('Titel', max_length=200)
-    slug = AutoSlugField(populate_from='name', null=True, blank=True)
+    slug = AutoSlugField(populate_from='name', unique_with=('name'), null=True, blank=True)
     organizer = models.ForeignKey(Organizer, on_delete=models.SET_NULL, null=True, blank=True)
     freeOfCharge = models.BooleanField(default=True)
     availableLiveOnly = models.BooleanField(default=True)

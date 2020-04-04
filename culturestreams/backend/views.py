@@ -14,11 +14,10 @@ class EventFilter(filters.FilterSet):
         Model = Event
         fields = ('startDate',)
 
-
 class TagView(viewsets.ModelViewSet):
     queryset = Tag.objects.all()
     serializer_class = TagSerializer
-    filter_fields = ('id',)
+    filter_fields = ('id','name','slug')
     permission_classes = (IsAuthenticatedOrReadOnly,)
 
 class CategoryView(viewsets.ModelViewSet):
