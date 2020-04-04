@@ -23,7 +23,7 @@ class Organizer(models.Model):
     image = models.URLField('Bild', null=True, blank=True, max_length=250)
     #eventContact TODO
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)
-    tags = TaggableManager()
+    tags = TaggableManager(blank=True)
     datePublished = CustomDateTimeField(auto_now_add=True)
     #lastUpdated TODO = CustomDateTimeField(auto_now_add=True)
     def __str__(self):
@@ -47,7 +47,7 @@ class Event(models.Model):
     #eventContact TODO
     #eventLocation TODO
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)
-    tags = TaggableManager()
+    tags = TaggableManager(blank=True)
     datePublished = models.DateTimeField(auto_now_add=True)
     #lastUpdated TODO = CustomDateTimeField(auto_now_add=True)
     def __str__(self):
@@ -65,6 +65,6 @@ class Plattform(models.Model):
     #eventContact TODO
     #eventLocation TODO
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)
-    tags = TaggableManager()
+    tags = TaggableManager(blank=True)
     def __str__(self):
         return self.name + ' by ' + self.organizer.name
