@@ -2,9 +2,7 @@ from django.db import models
 from autoslug import AutoSlugField
 from .helpers import CustomDateTimeField
 import datetime
-
-# class Tag(models.Model):
-#     name = models.CharField('Name', max_length=200)
+from taggit.managers import TaggableManager
 
 class Category(models.Model):
     name = models.CharField('Name', max_length=200)
@@ -25,7 +23,7 @@ class Organizer(models.Model):
     image = models.URLField('Bild', null=True, blank=True, max_length=250)
     #eventContact TODO
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)
-    # tags = models.ManyToManyField(Tag, blank=True)
+    tags = TaggableManager()
     datePublished = CustomDateTimeField(auto_now_add=True)
     #lastUpdated TODO = CustomDateTimeField(auto_now_add=True)
     def __str__(self):
@@ -38,6 +36,7 @@ class Event(models.Model):
     start = models.DateTimeField()
     end = models.DateTimeField()
     freeOfCharge = models.BooleanField(default=True)
+    recurring = models.BooleanField(default=False)
     #eventCost abhängig von freeOfCharge=False TODO
     availableLiveOnly = models.BooleanField(default=True)
     #reccuring TODO
@@ -48,7 +47,7 @@ class Event(models.Model):
     #eventContact TODO
     #eventLocation TODO
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)
-    # tags = models.ManyToManyField(Tag, blank=True)
+    tags = TaggableManager()
     datePublished = models.DateTimeField(auto_now_add=True)
     #lastUpdated TODO = CustomDateTimeField(auto_now_add=True)
     def __str__(self):
@@ -66,6 +65,6 @@ class Plattform(models.Model):
     #eventContact TODO
     #eventLocation TODO
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)
-    # tags = models.ManyToManyField(Tag, blank=True)
+    tags = TaggableManager()
     def __str__(self):
         return self.name + ' by ' + self.organizer.name

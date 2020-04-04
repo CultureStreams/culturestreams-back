@@ -5,3 +5,5 @@ django-environ
 django-cors-headers
 django-autoslug
 bcrypt
+django-taggit
+django-taggit-serializer

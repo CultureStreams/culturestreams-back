@@ -32,6 +32,8 @@ INSTALLED_APPS = [
     'autoslug',
     'bcrypt',
     'rest_framework.authtoken',
+    'taggit',
+    'taggit_serializer',
 ]
 
 MIDDLEWARE = [
@@ -73,13 +75,13 @@ REST_FRAMEWORK = {
     ),
 }
 
-
-
 CORS_ORIGIN_REGEX_WHITELIST = [
     r"^https://\w+\.culturestreams\.org$",
     "http://localhost:4200",
 ]
 #localhost TODO
+
+TAGGIT_CASE_INSENSITIVE =True
 
 WSGI_APPLICATION = 'culturestreams.wsgi.application'
 
