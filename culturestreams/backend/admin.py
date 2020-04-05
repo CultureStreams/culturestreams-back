@@ -2,7 +2,7 @@ from django.contrib import admin
 from .models import Category, Event, Plattform, Organizer
 
 class EventAdmin(admin.ModelAdmin):
-    list_display = ('id','name','slug','tagList','start','category','organizer','freeOfCharge','availableLiveOnly','link','recurring',)
+    list_display = ('id','name','slug','tagList','start','category','organizer','link','freeOfCharge','availableLiveOnly','recurring',)
     ordering = ('id','name','start','category','organizer','freeOfCharge','availableLiveOnly',)
     search_fields = ('name','organizer')
     def get_queryset(self, request):
