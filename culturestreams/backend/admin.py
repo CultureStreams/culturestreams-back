@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Category, Event, Plattform, Organizer
+from .models import Category, Event, Channel, Organizer
 
 class EventAdmin(admin.ModelAdmin):
     list_display = ('id','name','slug','tagList','start','category','organizer','link','freeOfCharge','availableLiveOnly')
@@ -10,7 +10,7 @@ class EventAdmin(admin.ModelAdmin):
     def tagList(self, obj):
         return u", ".join(o.name for o in obj.tags.all())
 
-class PlattformAdmin(admin.ModelAdmin):
+class ChannelAdmin(admin.ModelAdmin):
     list_display = ('id','name','slug','tagList','category','organizer','freeOfCharge','availableLiveOnly','link','description','image',)
     ordering = ('id','name','link',)
     search_fields = ('name','organizer',)
@@ -34,6 +34,6 @@ class CategoryAdmin(admin.ModelAdmin):
     search_fields = ('name',)
 
 admin.site.register(Event, EventAdmin)
-admin.site.register(Plattform, PlattformAdmin)
+admin.site.register(Channel, ChannelAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Organizer, OrganizerAdmin)

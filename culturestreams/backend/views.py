@@ -1,8 +1,8 @@
 from rest_framework import viewsets
 from django_filters import rest_framework as filters
-from .models import Category, Event, Plattform, Organizer
+from .models import Category, Event, Channel, Organizer
 from taggit.models import Tag
-from .serializers import EventSerializer, PlattformSerializer, CategorySerializer, OrganizerSerializer, TagSerializer
+from .serializers import EventSerializer, ChannelSerializer, CategorySerializer, OrganizerSerializer, TagSerializer
 
 class TagsFilter(filters.CharFilter):
     def filter(self, qs, value):
@@ -19,10 +19,10 @@ class EventFilter(filters.FilterSet):
         model = Event
         fields = ('id','name','category','organizer','slug','start','end','freeOfCharge','availableLiveOnly')
 
-class PlattformFilter(filters.FilterSet):
+class ChannelFilter(filters.FilterSet):
     tags = TagsFilter(field_name='tags')
     class Meta:
-        model = Plattform
+        model = Channel
         fields = ('id','category','organizer','slug','freeOfCharge','availableLiveOnly')
 
 class TagView(viewsets.ModelViewSet):
@@ -40,10 +40,10 @@ class EventView(viewsets.ModelViewSet):
     serializer_class = EventSerializer
     filter_class = EventFilter
 
-class PlattformView(viewsets.ModelViewSet):
-    queryset = Plattform.objects.all()
-    serializer_class = PlattformSerializer
-    filterset_class = PlattformFilter
+class ChannelView(viewsets.ModelViewSet):
+    queryset = Channel.objects.all()
+    serializer_class = ChannelSerializer
+    filterset_class = ChannelFilter
 
 class OrganizerView(viewsets.ModelViewSet):
     queryset = Organizer.objects.all()

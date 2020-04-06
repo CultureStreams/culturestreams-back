@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Category, Event, Plattform, Organizer
+from .models import Category, Event, Channel, Organizer
 from taggit_serializer.serializers import (TagListSerializerField, TaggitSerializer)
 from taggit.models import Tag
 
@@ -28,11 +28,11 @@ class EventSerializer(TaggitSerializer, serializers.ModelSerializer):
         #rep_cat['category'] = instance.category.name
         #return rep_cat
 
-class PlattformSerializer(serializers.ModelSerializer):
+class ChannelSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Plattform
+        model = Channel
         fields = ('__all__')
     #def to_representation(self, instance):
-        #rep_cat = super(PlattformSerializer, self).to_representation(instance)
+        #rep_cat = super(ChannelSerializer, self).to_representation(instance)
         #rep_cat['category'] = instance.category.name
         #return rep_cat

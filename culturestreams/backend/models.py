@@ -49,7 +49,7 @@ class Event(models.Model):
     def __str__(self):
         return self.name
 
-class Plattform(models.Model):
+class Channel(models.Model):
     name = models.CharField('Titel', max_length=200)
     slug = AutoSlugField(populate_from='name', unique_with=('name'), null=True, blank=True)
     organizer = models.ForeignKey(Organizer, on_delete=models.SET_NULL, null=True, blank=True)
