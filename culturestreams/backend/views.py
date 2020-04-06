@@ -12,18 +12,18 @@ class TagsFilter(filters.CharFilter):
         return qs
 
 class EventFilter(filters.FilterSet):
-    dateFrom = filters.DateTimeFilter(field_name='start', lookup_expr='gte')
-    dateTo = filters.DateTimeFilter(field_name='start', lookup_expr='lt')
+    start = filters.DateTimeFromToRangeFilter()
+    end = filters.DateTimeFromToRangeFilter()
     tags = TagsFilter(field_name='tags')
     class Meta:
         model = Event
-        fields = ('id','name','category','organizer','freeOfCharge','availableLiveOnly', 'datePublished')
+        fields = ('id','name','category','organizer','slug','start','end','freeOfCharge','availableLiveOnly')
 
 class PlattformFilter(filters.FilterSet):
     tags = TagsFilter(field_name='tags')
     class Meta:
         model = Plattform
-        fields = ('id','category','organizer','freeOfCharge','availableLiveOnly')
+        fields = ('id','category','organizer','slug','freeOfCharge','availableLiveOnly')
 
 class TagView(viewsets.ModelViewSet):
     queryset = Tag.objects.all()
@@ -33,7 +33,7 @@ class TagView(viewsets.ModelViewSet):
 class CategoryView(viewsets.ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
-    filter_fields = ('id',)
+    filter_fields = ('id','name','slug')
 
 class EventView(viewsets.ModelViewSet):
     queryset = Event.objects.all()
@@ -48,4 +48,4 @@ class PlattformView(viewsets.ModelViewSet):
 class OrganizerView(viewsets.ModelViewSet):
     queryset = Organizer.objects.all()
     serializer_class = OrganizerSerializer
-    filter_fields = ('id','name','category')
+    filter_fields = ('id','name','category','slug')

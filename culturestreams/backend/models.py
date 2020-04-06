@@ -36,14 +36,12 @@ class Event(models.Model):
     start = models.DateTimeField()
     end = models.DateTimeField()
     freeOfCharge = models.BooleanField(default=True)
-    recurring = models.BooleanField(default=False)
-    #eventCost abhängig von freeOfCharge=False TODO
     availableLiveOnly = models.BooleanField(default=True)
     link = models.URLField('Link', max_length=250)
+    infoLink = models.URLField('weitere Infos (Link)', null=True, blank=True, max_length=250)
     description = models.TextField('Beschreibung', max_length=1000)
     image = models.URLField('Bild', blank=True, max_length=250)
-    #eventContact TODO
-    #eventLocation TODO
+    #location
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)
     tags = TaggableManager(blank=True)
     datePublished = models.DateTimeField(auto_now_add=True)
