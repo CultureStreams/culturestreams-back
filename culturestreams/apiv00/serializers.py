@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Category, Event, Channel, Organizer
+from backend.models import Category, Event, Channel, Organizer
 from taggit_serializer.serializers import (TagListSerializerField, TaggitSerializer)
 from taggit.models import Tag
 

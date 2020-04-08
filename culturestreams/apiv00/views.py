@@ -1,6 +1,6 @@
 from rest_framework import viewsets
 from django_filters import rest_framework as filters
-from .models import Category, Event, Channel, Organizer
+from backend.models import Category, Event, Channel, Organizer
 from taggit.models import Tag
 from .serializers import EventSerializer, ChannelSerializer, CategorySerializer, OrganizerSerializer, TagSerializer
 

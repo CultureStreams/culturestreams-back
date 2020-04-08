@@ -20,6 +20,8 @@ ALLOWED_HOSTS = tuple(env.list('ALLOWED_HOSTS', default=[]))
 
 INSTALLED_APPS = [
     'backend.apps.BackendConfig',
+    'apiv00.apps.Apiv00Config',
+    'apiv01.apps.Apiv01Config',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
