@@ -27,6 +27,7 @@ class ChannelFilter(filters.FilterSet):
 
 class TagView(viewsets.ModelViewSet):
     queryset = Tag.objects.all()
+    # renderer_classes = [CustomJSONRenderer]
     serializer_class = TagSerializer
     filter_fields = ('id','name','slug')
 
