@@ -18,7 +18,7 @@ class Category(models.Model):
 class Organizer(models.Model):
     name = models.CharField('Name', max_length=200)
     slug = AutoSlugField(populate_from='name', unique_with=('name'), null=True, blank=True)
-    website = models.URLField('Webseite', null=True, blank=True, max_length=250)
+    link = models.URLField('Webseite', null=True, blank=True, max_length=250)
     description = models.TextField('Beschreibung', null=True, blank=True, max_length=700)
     image = models.URLField('Bild', null=True, blank=True, max_length=250)
     #eventContact TODO
