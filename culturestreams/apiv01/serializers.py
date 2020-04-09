@@ -16,28 +16,37 @@ class CategorySerializer(serializers.ModelSerializer):
         fields = ('__all__')
 
 class OrganizerSerializer(serializers.ModelSerializer):
+    tags = TagListSerializerField()
+    category = CategorySerializer(many=False, read_only=True)
     class Meta:
         model = Organizer
         resource_name = 'organizers'
         fields = ('__all__')
+        read_only_fields = ['category']
+
+class OrganizerSubSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Organizer
+        resource_name = 'organizers'
+        fields = ('__all__')
+        read_only_fields = ['category']
 
 class EventSerializer(TaggitSerializer, serializers.ModelSerializer):
     tags = TagListSerializerField()
+    category = CategorySerializer(many=False, read_only=True)
+    organizer = OrganizerSubSerializer(many=False)
     class Meta:
         model = Event
         resource_name = 'events'
         fields = ('__all__')
-    #def to_representation(self, instance):
-        #rep_cat = super(EventSerializer, self).to_representation(instance)
-        #rep_cat['category'] = instance.category.name
-        #return rep_cat
+        read_only_fields = ['category']
 
 class ChannelSerializer(serializers.ModelSerializer):
+    tags = TagListSerializerField()
+    category = CategorySerializer(many=False, read_only=True)
+    organizer = OrganizerSubSerializer(many=False)
     class Meta:
         model = Channel
         resource_name = 'channels'
         fields = ('__all__')
-    #def to_representation(self, instance):
-        #rep_cat = super(ChannelSerializer, self).to_representation(instance)
-        #rep_cat['category'] = instance.category.name
-        #return rep_cat
+        read_only_fields = ['category']
