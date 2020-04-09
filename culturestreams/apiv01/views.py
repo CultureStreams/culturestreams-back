@@ -25,10 +25,8 @@ class ChannelView(viewsets.ModelViewSet):
     queryset = Channel.objects.all()
     serializer_class = ChannelSerializer
     filterset_class = ChannelFilter
-    read_only_fields = ['category']
 
 class OrganizerView(viewsets.ModelViewSet):
     queryset = Organizer.objects.all()
     serializer_class = OrganizerSerializer
     filterset_class = OrganizerFilter
-    read_only_fields = ['category']
