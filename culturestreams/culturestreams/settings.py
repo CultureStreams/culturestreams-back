@@ -78,7 +78,7 @@ REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': [
         'rest_framework.renderers.JSONRenderer',
         'rest_framework.renderers.BrowsableAPIRenderer',
-        'apiv01.renderers.CustomJSONRenderer',
+        # 'apiv01.renderers.CustomJSONRenderer',
     ],
 }
 
