@@ -6,13 +6,13 @@ from taggit.models import Tag
 class TagSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tag
-        resource_name = 'tags'
+        resource_name = 'objects'
         fields = ('id','name','slug')
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
-        resource_name = 'categories'
+        resource_name = 'objects'
         fields = ('__all__')
 
 class OrganizerSerializer(serializers.ModelSerializer):
@@ -20,7 +20,7 @@ class OrganizerSerializer(serializers.ModelSerializer):
     category = CategorySerializer(many=False, read_only=True)
     class Meta:
         model = Organizer
-        resource_name = 'organizers'
+        resource_name = 'objects'
         fields = ('__all__')
 
 class OrganizerSubSerializer(serializers.ModelSerializer):
@@ -35,7 +35,7 @@ class EventSerializer(TaggitSerializer, serializers.ModelSerializer):
     organizer = OrganizerSubSerializer(many=False)
     class Meta:
         model = Event
-        resource_name = 'events'
+        resource_name = 'objects'
         fields = ('__all__')
 
 class ChannelSerializer(serializers.ModelSerializer):
@@ -44,5 +44,5 @@ class ChannelSerializer(serializers.ModelSerializer):
     organizer = OrganizerSubSerializer(many=False)
     class Meta:
         model = Channel
-        resource_name = 'channels'
+        resource_name = 'objects'
         fields = ('__all__')
