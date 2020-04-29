@@ -31,8 +31,8 @@ class OrganizerSubSerializer(serializers.ModelSerializer):
 
 class EventSerializer(TaggitSerializer, serializers.ModelSerializer):
     tags = TagListSerializerField()
-    category = CategorySerializer(many=False, read_only=True)
-    organizer = OrganizerSubSerializer(many=False)
+    # category = CategorySerializer(many=False, read_only=True)
+    # organizer = OrganizerSubSerializer(many=False)
     class Meta:
         model = Event
         resource_name = 'events'

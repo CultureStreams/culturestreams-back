@@ -60,7 +60,7 @@ class Event(models.Model):
     infoLink = models.URLField('weitere Infos (Link)', null=True, blank=True, max_length=250)
     donationLink = models.URLField('weitere Infos (Link)', null=True, blank=True, max_length=250)
     description = models.TextField('Beschreibung', max_length=1000)
-    image = models.URLField('Bild', blank=True, max_length=250)
+    image = models.URLField('Bild', null=True, blank=True, max_length=250)
     #location
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)
     tags = TaggableManager(blank=True)
