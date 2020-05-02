@@ -18,14 +18,11 @@ class CategorySerializer(serializers.ModelSerializer):
 
 class OrganizerSerializer(TaggitSerializer, serializers.ModelSerializer):
     tags = TagListSerializerField()
+    category = CategorySerializer(many=False, read_only=True)
     class Meta:
         model = Organizer
         resource_name = 'organizers'
         fields = ('__all__')
-    def to_representation(self, instance):
-        data = super(OrganizerSerializer, self).to_representation(instance)
-        data['category'] = CategorySerializer(instance=instance.category).data
-        return data
 
 class OrganizerPostSerializer(TaggitSerializer, serializers.ModelSerializer):
     tags = TagListSerializerField()
@@ -48,15 +45,12 @@ class OrganizerBasicSerializer(TaggitSerializer, serializers.ModelSerializer):
 
 class EventSerializer(TaggitSerializer, serializers.ModelSerializer):
     tags = TagListSerializerField()
+    category = CategorySerializer(many=False, read_only=True)
+    organizer = OrganizerSubSerializer(many=False)
     class Meta:
         model = Event
         resource_name = 'events'
         fields = ('__all__')
-    def to_representation(self, instance):
-        data = super(EventSerializer, self).to_representation(instance)
-        data['organizer'] = OrganizerBasicSerializer(instance=instance.organizer).data
-        data['category'] = CategorySerializer(instance=instance.category).data
-        return data
 
 class EventPostSerializer(TaggitSerializer, serializers.ModelSerializer):
     categoryId = serializers.IntegerField(source='category_id')
@@ -74,15 +68,12 @@ class EventPostSerializer(TaggitSerializer, serializers.ModelSerializer):
 
 class ChannelSerializer(TaggitSerializer, serializers.ModelSerializer):
     tags = TagListSerializerField()
+    category = CategorySerializer(many=False, read_only=True)
+    organizer = OrganizerSubSerializer(many=False)
     class Meta:
         model = Channel
         resource_name = 'channels'
         fields = ('__all__')
-    def to_representation(self, instance):
-        data = super(ChannelSerializer, self).to_representation(instance)
-        data['organizer'] = OrganizerBasicSerializer(instance=instance.organizer).data
-        data['category'] = CategorySerializer(instance=instance.category).data
-        return data
 
 class ChannelPostSerializer(TaggitSerializer, serializers.ModelSerializer):
     categoryId = serializers.IntegerField(source='category_id')
