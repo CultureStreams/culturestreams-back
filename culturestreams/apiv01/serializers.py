@@ -35,9 +35,9 @@ class OrganizerSerializer(serializers.ModelSerializer):
         fields = ('__all__')
 
 class EventNestedSerializer(TaggitSerializer, serializers.ModelSerializer):
+    categoryId = serializers.IntegerField(source='category_id')
+    organizerId = serializers.IntegerField(source='organizer_id')
     tags = TagListSerializerField()
-    # categoryId = serializers.IntegerField(source='category')
-    # organizerId = serializers.IntegerField(source='organizer')
     class Meta:
         model = Event
         resource_name = 'event'
