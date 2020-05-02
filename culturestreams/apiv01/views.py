@@ -2,7 +2,7 @@ from rest_framework import viewsets
 from django_filters import rest_framework as filters
 from backend.models import Category, Event, Channel, Organizer
 from .serializers import EventSerializer, ChannelSerializer, CategorySerializer, OrganizerSerializer, TagSerializer
-from .serializers import EventNestedSerializer, ChannelNestedSerializer, OrganizerNestedSerializer
+from .serializers import EventPostSerializer, ChannelPostSerializer, OrganizerPostSerializer
 from .filters import EventFilter, ChannelFilter, OrganizerFilter, CategoryFilter, TagFilter
 from .renderers import CustomJSONRenderer
 from taggit.models import Tag
@@ -24,30 +24,30 @@ class CategoryView(viewsets.ModelViewSet):
 
 class EventView(viewsets.ModelViewSet):
     queryset = Event.objects.all().order_by('start')
-    serializer_class = EventNestedSerializer
+    serializer_class = EventSerializer
     filterset_class = EventFilter
     renderer_classes = [CustomJSONRenderer]
-    # def get_serializer_class(self):
-    #      if self.request.method in ['GET']:
-    #          return EventNestedSerializer
-    #      return EventSerializer
+    def get_serializer_class(self):
+         if self.request.method in ['GET']:
+             return EventSerializer
+         return EventPostSerializer
 
 class ChannelView(viewsets.ModelViewSet):
     queryset = Channel.objects.all().order_by('name')
-    serializer_class = ChannelNestedSerializer
+    serializer_class = ChannelSerializer
     filterset_class = ChannelFilter
     renderer_classes = [CustomJSONRenderer]
-    # def get_serializer_class(self):
-    #      if self.request.method in ['GET']:
-    #          return ChannelReadSerializer
-    #      return ChannelSerializer
+    def get_serializer_class(self):
+         if self.request.method in ['GET']:
+             return ChannelSerializer
+         return ChannelPostSerializer
 
 class OrganizerView(viewsets.ModelViewSet):
     queryset = Organizer.objects.all().order_by('name')
-    serializer_class = OrganizerNestedSerializer
+    serializer_class = OrganizerSerializer
     filterset_class = OrganizerFilter
     renderer_classes = [CustomJSONRenderer]
-    # def get_serializer_class(self):
-    #      if self.request.method in ['GET']:
-    #          return OrganizerReadSerializer
-    #      return OrganizerSerializer
+    def get_serializer_class(self):
+         if self.request.method in ['GET']:
+             return OrganizerSerializer
+         return OrganizerPostSerializer
