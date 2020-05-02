@@ -46,7 +46,7 @@ class OrganizerBasicSerializer(TaggitSerializer, serializers.ModelSerializer):
 class EventSerializer(TaggitSerializer, serializers.ModelSerializer):
     tags = TagListSerializerField()
     category = CategorySerializer(many=False, read_only=True)
-    organizer = OrganizerSubSerializer(many=False)
+    organizer = OrganizerBasicSerializer(many=False)
     class Meta:
         model = Event
         resource_name = 'events'
@@ -69,7 +69,7 @@ class EventPostSerializer(TaggitSerializer, serializers.ModelSerializer):
 class ChannelSerializer(TaggitSerializer, serializers.ModelSerializer):
     tags = TagListSerializerField()
     category = CategorySerializer(many=False, read_only=True)
-    organizer = OrganizerSubSerializer(many=False)
+    organizer = OrganizerBasicSerializer(many=False)
     class Meta:
         model = Channel
         resource_name = 'channels'
