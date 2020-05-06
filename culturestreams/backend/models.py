@@ -68,6 +68,8 @@ class Event(models.Model):
     tags = TaggableManager(blank=True)
     datePublished = models.DateTimeField(auto_now_add=True)
     #lastUpdated TODO = CustomDateTimeField(auto_now_add=True)
+    # class Meta:
+    #     unique_together = [['link', 'start'],['name', 'start']]
         # ['name', 'start'],
     def __str__(self):
         return self.name
