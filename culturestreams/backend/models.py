@@ -29,7 +29,7 @@ class Organizer(models.Model):
     def __str__(self):
         return self.name
 
-class Member(models.Model):
+class Associate(models.Model):
     name = models.CharField('Name', max_length=200)
     slug = AutoSlugField(populate_from='name', unique_with=('name'), null=True, blank=True)
     is_artist = models.BooleanField(default=False)
@@ -51,21 +51,24 @@ class Event(models.Model):
     subtitle = models.CharField('Untertitel', max_length=200, null=True, blank=True)
     slug = AutoSlugField(populate_from=('name'), unique_with=('name', 'start'), null=True, blank=True)
     organizer = models.ForeignKey(Organizer, on_delete=models.SET_NULL, null=True, blank=True)
-    member = models.ManyToManyField(Member, blank=True)
+    member = models.ManyToManyField(Associate, blank=True)
     start = models.DateTimeField()
     end = models.DateTimeField()
     freeOfCharge = models.BooleanField(default=True)
     availableLiveOnly = models.BooleanField(default=True)
     link = models.URLField('StreamLink (Link)', max_length=250)
     infoLink = models.URLField('weitere Infos (Link)', null=True, blank=True, max_length=250)
+    infoLinkText = models.CharField('Beschreibung Link (weitere Infos))', max_length=200, null=True, blank=True)
     donationLink = models.URLField('Spenden (Link)', null=True, blank=True, max_length=250)
-    description = models.TextField('Beschreibung', max_length=1000)
+    #donationType
+    description = models.TextField('Beschreibung', max_length=1500)
     image = models.URLField('Bild (Link)', null=True, blank=True, max_length=250)
-    #location
+    location = models.CharField('Ort', max_length=200, null=True, blank=True)
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)
     tags = TaggableManager(blank=True)
     datePublished = models.DateTimeField(auto_now_add=True)
     #lastUpdated TODO = CustomDateTimeField(auto_now_add=True)
+        # ['name', 'start'],
     def __str__(self):
         return self.name
 

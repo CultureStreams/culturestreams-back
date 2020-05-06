@@ -78,8 +78,11 @@ REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': [
         'rest_framework.renderers.JSONRenderer',
         'rest_framework.renderers.BrowsableAPIRenderer',
+
         # 'apiv01.renderers.CustomJSONRenderer',
     ],
+    # 'DEFAULT_PAGINATION_CLASS': 'backend.pagination.CustomPagination',
+    # 'PAGE_SIZE': 50
 }
 
 CORS_ORIGIN_REGEX_WHITELIST = [

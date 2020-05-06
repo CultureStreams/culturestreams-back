@@ -37,11 +37,19 @@ class OrganizerPostSerializer(TaggitSerializer, serializers.ModelSerializer):
         return data
 
 class OrganizerBasicSerializer(TaggitSerializer, serializers.ModelSerializer):
-    tags = TagListSerializerField()
+    # tags = TagListSerializerField()
     class Meta:
         model = Organizer
         resource_name = 'organizer'
-        fields = ('__all__')
+        fields = ('id', 'name')
+
+# class MemberSerializer(TaggitSerializer, serializers.ModelSerializer):
+#     tags = TagListSerializerField()
+#     category = CategorySerializer(many=False, read_only=True)
+#     class Meta:
+#         model = Member
+#         resource_name = 'members'
+#         fields = ('__all__')
 
 class EventSerializer(TaggitSerializer, serializers.ModelSerializer):
     tags = TagListSerializerField()
