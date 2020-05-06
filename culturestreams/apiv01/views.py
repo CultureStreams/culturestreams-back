@@ -27,12 +27,16 @@ class EventView(viewsets.ModelViewSet):
     queryset = Event.objects.all().order_by('start')
     serializer_class = EventSerializer
     filterset_class = EventFilter
-    pagination_class = CustomPagination
+    # pagination_class = CustomPagination
     renderer_classes = [CustomJSONRenderer]
     def get_serializer_class(self):
          if self.request.method in ['GET']:
              return EventSerializer
          return EventPostSerializer
+    # def get_pagination_class(self):
+    #      if self.request.method in ['GET']:
+    #          return CustomPagination
+    #      return self
 
 class ChannelView(viewsets.ModelViewSet):
     queryset = Channel.objects.all().order_by('name')
