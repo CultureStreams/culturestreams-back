@@ -63,7 +63,7 @@ class Event(models.Model):
     #donationType
     description = models.TextField('Beschreibung', max_length=1500)
     image = models.URLField('Bild (Link)', null=True, blank=True, max_length=250)
-    location = models.CharField('Ort', max_length=200, null=True, blank=True)
+    city = models.CharField('Ort', max_length=200, null=True, blank=True)
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)
     tags = TaggableManager(blank=True)
     datePublished = models.DateTimeField(auto_now_add=True)
