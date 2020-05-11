@@ -1,9 +1,9 @@
 from rest_framework import viewsets
 from django.db import models
 from django_filters import rest_framework as filters
-from backend.models import Category, Event, Channel, Organizer
+from backend.models import Category, Event, Channel, Organizer, Associate
 from taggit.models import Tag
-from .serializers import EventSerializer, ChannelSerializer, CategorySerializer, OrganizerSerializer, TagSerializer
+from .serializers import EventSerializer, ChannelSerializer, CategorySerializer, OrganizerSerializer, TagSerializer, AssociateSerializer
 
 class TagFilter(filters.FilterSet):
     class Meta:
@@ -22,26 +22,28 @@ class CategoryFilter(filters.FilterSet):
         model = Category
         fields = ('id','name','slug')
 
-class OrganizerFilter(filters.FilterSet):
-    tags = TagsFilter(field_name='tags')
-    category_name = filters.ModelMultipleChoiceFilter(
-        queryset=Category.objects.all(),
-        field_name="category__name",
+class AssociateFilter(filters.FilterSet):
+    associate_name = filters.ModelMultipleChoiceFilter(
+        queryset=Associate.objects.all(),
+        field_name="associate__name",
         to_field_name="name",
     )
-    category_id = filters.ModelMultipleChoiceFilter(
-        queryset=Category.objects.all(),
-        field_name="category__id",
+    associate_id = filters.ModelMultipleChoiceFilter(
+        queryset=Associate.objects.all(),
+        field_name="associate__id",
         to_field_name="id",
     )
-    category_slug = filters.ModelMultipleChoiceFilter(
-        queryset=Category.objects.all(),
-        field_name="category__slug",
+    associate_slug = filters.ModelMultipleChoiceFilter(
+        queryset=Associate.objects.all(),
+        field_name="associate__slug",
         to_field_name="slug",
     )
+
+class OrganizerFilter(filters.FilterSet):
+    tags = TagsFilter(field_name='tags')
     class Meta:
         model = Organizer
-        fields = ('id','name','category','slug')
+        fields = ('id','name','slug')
 
 class ChannelFilter(filters.FilterSet):
     tags = TagsFilter(field_name='tags')
@@ -83,6 +85,7 @@ class EventFilter(filters.FilterSet):
     start = filters.DateTimeFromToRangeFilter()
     end = filters.DateTimeFromToRangeFilter()
     tags = TagsFilter(field_name='tags')
+    # associates = AssociateFilter()
     category_name = filters.ModelMultipleChoiceFilter(
         queryset=Category.objects.all(),
         field_name="category__name",

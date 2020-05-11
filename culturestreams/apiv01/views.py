@@ -1,15 +1,21 @@
 from rest_framework import viewsets
 from django_filters import rest_framework as filters
-from backend.models import Category, Event, Channel, Organizer
-from .serializers import EventSerializer, ChannelSerializer, CategorySerializer, OrganizerSerializer, TagSerializer
-from .serializers import EventPostSerializer, ChannelPostSerializer, OrganizerPostSerializer
-from .filters import EventFilter, ChannelFilter, OrganizerFilter, CategoryFilter, TagFilter
+from backend.models import Category, Event, Channel, Organizer, Associate
+from .serializers import EventSerializer, ChannelSerializer, CategorySerializer, OrganizerSerializer, TagSerializer, AssociateSerializer
+from .serializers import EventPostSerializer, ChannelPostSerializer, OrganizerPostSerializer, AssociatePostSerializer
+from .filters import EventFilter, ChannelFilter, OrganizerFilter, CategoryFilter, TagFilter, AssociateFilter
 from .renderers import CustomJSONRenderer
 from taggit.models import Tag
 from backend.pagination import CustomPagination
 
 from rest_framework.response import Response
 from rest_framework import status
+
+# class CustomSearchFilter(filters.SearchFilter):
+#     def get_search_fields(self, view, request):
+#         if request.query_params.get('search_'):
+#             return ['title']
+#         return super(CustomSearchFilter, self).get_search_fields(view, request)
 
 class TagView(viewsets.ModelViewSet):
     queryset = Tag.objects.all().order_by('name')
@@ -27,6 +33,7 @@ class EventView(viewsets.ModelViewSet):
     queryset = Event.objects.all().order_by('start')
     serializer_class = EventSerializer
     filterset_class = EventFilter
+    search_fields = ['name', 'subtitle', 'tags', 'description']
     # pagination_class = CustomPagination
     renderer_classes = [CustomJSONRenderer]
     def get_serializer_class(self):
@@ -57,3 +64,13 @@ class OrganizerView(viewsets.ModelViewSet):
          if self.request.method in ['GET']:
              return OrganizerSerializer
          return OrganizerPostSerializer
+
+class AssociateView(viewsets.ModelViewSet):
+    queryset = Associate.objects.all().order_by('name')
+    serializer_class = AssociateSerializer
+    filterset_class = AssociateFilter
+    renderer_classes = [CustomJSONRenderer]
+    def get_serializer_class(self):
+         if self.request.method in ['GET']:
+             return AssociateSerializer
+         return AssociatePostSerializer

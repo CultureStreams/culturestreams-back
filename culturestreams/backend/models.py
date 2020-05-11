@@ -22,8 +22,8 @@ class Organizer(models.Model):
     description = models.TextField('Beschreibung', null=True, blank=True, max_length=700)
     image = models.URLField('Bild', null=True, blank=True, max_length=250)
     #eventContact TODO
-    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)
-    tags = TaggableManager(blank=True)
+    # category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)
+    # tags = TaggableManager(blank=True)
     datePublished = CustomDateTimeField(auto_now_add=True)
     #lastUpdated TODO = CustomDateTimeField(auto_now_add=True)
     def __str__(self):
@@ -39,8 +39,8 @@ class Associate(models.Model):
     description = models.TextField('Beschreibung', null=True, blank=True, max_length=700)
     image = models.URLField('Bild', null=True, blank=True, max_length=250)
     #eventContact TODO
-    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)
-    tags = TaggableManager(blank=True)
+    # category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)
+    # tags = TaggableManager(blank=True)
     datePublished = CustomDateTimeField(auto_now_add=True)
     #lastUpdated TODO = CustomDateTimeField(auto_now_add=True)
     def __str__(self):
@@ -51,7 +51,7 @@ class Event(models.Model):
     subtitle = models.CharField('Untertitel', max_length=200, null=True, blank=True)
     slug = AutoSlugField(populate_from=('name'), unique_with=('name', 'start'), null=True, blank=True)
     organizer = models.ForeignKey(Organizer, on_delete=models.SET_NULL, null=True, blank=True)
-    member = models.ManyToManyField(Associate, blank=True)
+    associates = models.ManyToManyField(Associate, blank=True)
     start = models.DateTimeField()
     end = models.DateTimeField()
     freeOfCharge = models.BooleanField(default=True)
