@@ -6,7 +6,7 @@ from .serializers import EventPostSerializer, ChannelPostSerializer, OrganizerPo
 from .filters import EventFilter, ChannelFilter, OrganizerFilter, CategoryFilter, TagFilter, AssociateFilter
 from .renderers import CustomJSONRenderer
 from taggit.models import Tag
-from backend.pagination import CustomPagination
+from backend.pagination import EventPagination, OrganizerPagination
 
 from rest_framework.response import Response
 from rest_framework import status
@@ -34,16 +34,12 @@ class EventView(viewsets.ModelViewSet):
     serializer_class = EventSerializer
     filterset_class = EventFilter
     search_fields = ['name', 'subtitle', 'tags', 'description']
-    # pagination_class = CustomPagination
+    # pagination_class = EventPagination
     renderer_classes = [CustomJSONRenderer]
     def get_serializer_class(self):
          if self.request.method in ['GET']:
              return EventSerializer
          return EventPostSerializer
-    # def get_pagination_class(self):
-    #      if self.request.method in ['GET']:
-    #          return CustomPagination
-    #      return self
 
 class ChannelView(viewsets.ModelViewSet):
     queryset = Channel.objects.all().order_by('name')
@@ -59,6 +55,7 @@ class OrganizerView(viewsets.ModelViewSet):
     queryset = Organizer.objects.all().order_by('name')
     serializer_class = OrganizerSerializer
     filterset_class = OrganizerFilter
+    # pagination_class = OrganizerPagination
     renderer_classes = [CustomJSONRenderer]
     def get_serializer_class(self):
          if self.request.method in ['GET']:

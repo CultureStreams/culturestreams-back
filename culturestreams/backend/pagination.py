@@ -24,9 +24,9 @@ DEFAULT_PAGE = 1
         # response = super(CustomJSONRenderer, self).render(response_data, accepted_media_type, renderer_context)
         # return response
 
-class CustomPagination(PageNumberPagination):
+class EventPagination(PageNumberPagination):
     page = DEFAULT_PAGE
-    page_size = 10
+    page_size = 5
     page_size_query_param = 'page_size'
 
     def get_paginated_response(self, data):
@@ -36,7 +36,25 @@ class CustomPagination(PageNumberPagination):
             'previous': self.get_previous_link(),
             'count': self.page.paginator.count,
             'limit': self.page_size,
-            'objects': data
+            'events': data
+            }
+        # paginated_response[resource] = data
+        return Response(paginated_response)
+
+class OrganizerPagination(PageNumberPagination):
+    page = DEFAULT_PAGE
+    page_size = 5
+    page_size_query_param = 'page_size'
+
+    def get_paginated_response(self, data):
+
+        # resource = getattr(data.get('view').get_serializer().Meta, 'resource_name', 'objects')
+        paginated_response = {
+            'next': self.get_next_link(),
+            'previous': self.get_previous_link(),
+            'count': self.page.paginator.count,
+            'limit': self.page_size,
+            'organizers': data
             }
         # paginated_response[resource] = data
         return Response(paginated_response)

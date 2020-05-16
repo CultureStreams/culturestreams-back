@@ -47,8 +47,8 @@ class Associate(models.Model):
         return self.name
 
 class Event(models.Model):
-    name = models.CharField('Titel', max_length=200)
-    subtitle = models.CharField('Untertitel', max_length=200, null=True, blank=True)
+    name = models.CharField('Titel', max_length=100)
+    subtitle = models.CharField('Untertitel', max_length=140, null=True, blank=True)
     slug = AutoSlugField(populate_from=('name'), unique_with=('name', 'start'), null=True, blank=True)
     organizer = models.ForeignKey(Organizer, on_delete=models.SET_NULL, null=True, blank=True)
     associates = models.ManyToManyField(Associate, blank=True)
@@ -58,12 +58,13 @@ class Event(models.Model):
     availableLiveOnly = models.BooleanField(default=True)
     link = models.URLField('StreamLink (Link)', max_length=250)
     infoLink = models.URLField('weitere Infos (Link)', null=True, blank=True, max_length=250)
-    infoLinkText = models.CharField('Beschreibung Link (weitere Infos))', max_length=200, null=True, blank=True)
+    infoLinkText = models.CharField('Beschreibung Link (weitere Infos))', max_length=70, null=True, blank=True)
     donationLink = models.URLField('Spenden (Link)', null=True, blank=True, max_length=250)
     #donationType
-    description = models.TextField('Beschreibung', max_length=1500)
+    description = models.TextField('Beschreibung', max_length=2000)
     image = models.URLField('Bild (Link)', null=True, blank=True, max_length=250)
-    city = models.CharField('Ort', max_length=200, null=True, blank=True)
+    city = models.CharField('Stadt', max_length=100, null=True, blank=True)
+    location = models.CharField('Ort', max_length=100, null=True, blank=True)
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)
     tags = TaggableManager(blank=True)
     datePublished = models.DateTimeField(auto_now_add=True)
