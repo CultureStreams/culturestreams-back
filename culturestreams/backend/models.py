@@ -89,4 +89,4 @@ class Channel(models.Model):
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)
     tags = TaggableManager(blank=True)
     def __str__(self):
-        return self.name + ' by ' + self.organizer.name
+        return self.name
