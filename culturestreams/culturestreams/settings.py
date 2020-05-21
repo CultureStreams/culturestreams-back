@@ -88,6 +88,7 @@ REST_FRAMEWORK = {
 CORS_ORIGIN_REGEX_WHITELIST = [
     r"^https://\w+\.culturestreams\.org$",
     "http://localhost:4200",
+    "http://localhost:8080"
 ]
 #localhost TODO
 

@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models import Category, Event, Channel, Organizer, Associate
+from django.contrib.auth.models import User
 
 class EventAdmin(admin.ModelAdmin):
     list_display = ('id','name','slug','tagList','start','category','organizer','link','freeOfCharge','availableLiveOnly')
