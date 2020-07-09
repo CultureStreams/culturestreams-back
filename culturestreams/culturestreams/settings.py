@@ -89,7 +89,7 @@ CORS_ORIGIN_REGEX_WHITELIST = [
     r"^https://\w+\.culturestreams\.org$",
     "http://localhost:4200",
     "http://localhost:8080",
-    "https://carinaland.github.io"
+    "https://carinaland.github.io",
 ]
 #localhost TODO
 
